@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventory</string>
+
+    <!-- Label for menu option that inserts fake data into the app -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Label for menu option: deletes all product information in the app -->
+    <string name="action_delete_all_entries">Delete All Products</string>
+
+    <!-- Add a new product -->
+    <string name="editor_activity_new_product">Add Product</string>
+
+    <!--//MENU ITEMS//-->
+
+    <!-- Label for editor menu; save data and leave -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor menu; delete the current product -->
+    <string name="action_delete">Delete</string>
+
+
+    <!-- Label for Product -->
+    <string name="category_product">Product Information</string>
+
+    <!-- Text hint for product name field -->
+    <string name="hint_product_name">Product Name</string>
+
+    <!-- Text hint for production description -->
+    <string name="hint_product_desc">Product Description</string>
+
+
+    <!-- Label for price information -->
+    <string name="category_price">Price</string>
+
+    <!-- Text hint for price -->
+    <string name="hint_price">0.00</string>
+
+
+    <!-- Label for quantity -->
+    <string name="category_quantity">Quantity</string>
+
+    <!-- Text hint for quantity field  -->
+    <string name="hint_quantity">Quantity</string>
+
+    <!-- Units for quantity entered -->
+    <string name="unit_qty_each">ea</string>
+
+
+
+    <!-- Label for Supplier information-->
+    <string name="category_supplier">Supplier Information</string>
+
+    <!-- Label for supplier name -->
+    <string name="supplier_name">Supplier Name</string>
+
+    <!--Text hint for supplier name-->
+    <string name="hint_supplier_name">Supplier Name</string>
+
+
+    <!-- Label for supplier phone number -->
+    <string name="supplier_phone">Supplier Phone Number</string>
+
+    <!-- Text hint for price field -->
+    <string name="hint_phone_number">Phone number</string>
+</resources>
