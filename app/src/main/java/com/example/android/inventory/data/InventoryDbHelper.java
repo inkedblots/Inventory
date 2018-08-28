@@ -6,22 +6,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 
-/**
- * Database helper for the inventory app. Manages database creation and version management.
- */
 public class InventoryDbHelper extends SQLiteOpenHelper {
 
     public static final String LOG_TAG = InventoryDbHelper.class.getSimpleName();
 
-    /**
-     * Name of the database file
-     */
+    /** Name of the database file */
     private static final String DATABASE_NAME = "store.db";
 
-    /**
-     * Database version. If you change the database schema, you must increment the database version.
-     */
-    private static final int DATABASE_VERSION = 1;
+     //Database version. If you change the database schema, you must increment the database version.
+     private static final int DATABASE_VERSION = 1;
 
     /**
      * Constructs a new instance of {@link InventoryDbHelper}.
@@ -42,7 +35,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
                 + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + InventoryEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
                 + InventoryEntry.COLUMN_PRODUCT_DESC + " TEXT NOT NULL, "
-                + InventoryEntry.COLUMN_PRICE + " TEXT DEFAULT NULL, "
+                + InventoryEntry.COLUMN_PRICE + " INTEGER NOT NULL, "
                 + InventoryEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
                 + InventoryEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
                 + InventoryEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL);";

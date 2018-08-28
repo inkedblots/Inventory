@@ -1,43 +1,48 @@
 package com.example.android.inventory;
 
+import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
 
-import com.example.android.inventory.data.InventoryContract;
-import com.example.android.inventory.data.InventoryDbHelper;
+import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 
-import java.util.ArrayList;
 
 /**
- * Displays list of inventory that were entered and stored in the app.
+ * Displays list of products that were entered and stored in the app.
  */
-public class CatalogActivity extends AppCompatActivity {
-    public ArrayList<CatalogList> ListDatabase = new ArrayList<>();
-    RecyclerView recyclerView;
+public class CatalogActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor> {
 
-    /**
-     * Database helper that will provide us access to the database
-     */
-    private InventoryDbHelper mDbHelper;
+    int quantity = 0;
+    private EditText mQuantityEditText;
+
+    /** Identifier for the products data loader */
+    private static final int INVENTORY_LOADER = 0;
+
+    /** Adapter for the ListView */
+    InventoryCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
+        // Setup FAB to open EditorActivity
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,182 +52,64 @@ public class CatalogActivity extends AppCompatActivity {
             }
         });
 
-        ListDatabase.add(new CatalogList("Matthew", "News App Pt. 1", "1",
-                1, "Ahead", "555-555-5555"));
-        ListDatabase.add(new CatalogList("Olivia", "Tour Guide", "2", 1,
-                "Ahead", "555-555-5555"));
-        ListDatabase.add(new CatalogList("Chris", "News", "3",
-                1, "Ahead", "555-555-5555"));
+        // Find the ListView which will be populated with the inventory data
+        ListView inventoryListView = findViewById(R.id.list);
 
-        LinearLayoutManager linearLayoutManager = new
-                LinearLayoutManager(this);
+        // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
+        View emptyView = findViewById(R.id.empty_view);
+        inventoryListView.setEmptyView(emptyView);
 
-        CatalogAdapter listAdapter = new
-                CatalogAdapter() {
-                    @Override
-                    public void onBindViewHolder(@NonNull CatalogAdapter.ListHolder holder, int position) {
+        // Setup an Adapter to create a list item for each row of inventory data in the Cursor.
+        mCursorAdapter = new InventoryCursorAdapter(this, null);
+        inventoryListView.setAdapter(mCursorAdapter);
 
-                    }
-                };
-        listAdapter.Adapter();
+        // Setup the item click listener
+        inventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Create new intent to go to {@link EditorActivity}
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(listAdapter);
-    }
+                // Form the content URI that represents the specific product that was clicked on,
+                // by appending the "id" {@link InventoryEntry#CONTENT_URI}.
+                Uri currentProductUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
 
-    public class CatalogList {
-        private String ProductName;
-        private String ProductDesc;
-        private String Price;
-        private int Quantity;
-        private String SupplierName;
-        private String SupplierPhone;
+                // Set the URI on the data field of the intent
+                intent.setData(currentProductUri);
 
-        //This is how your object is created and also the order in which items should be
-        // added to the ArrayList
-
-        public CatalogList(String ProductName, String ProductDesc, String Price, int Quantity,
-                           String SupplierName, String SupplierPhone) {
-            this.ProductName = ProductName;
-            this.ProductDesc = ProductDesc;
-            this.Price = Price;
-            this.Quantity = Quantity;
-            this.SupplierName = SupplierName;
-            this.SupplierPhone = SupplierPhone;
-
-        }
-        //These are your GETTERS to return the selected items
-        public String getProductName() {
-            return ProductName;
-        }
-
-        public String getProductDesc() {
-            return ProductDesc;
-        }
-
-        public String getPrice() {
-            return Price;
-        }
-
-        public int getQuantity() {
-            return Quantity;
-        }
-
-        public String getSupplierName() {
-            return SupplierName;
-        }
-
-        public String getSupplierPhone() {
-            return SupplierPhone;
-        }
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper and pass the
-        // context, which is the current activity.
-        mDbHelper = new InventoryDbHelper(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        displayDatabaseInfo();
-    }
-
-    /**
-     * Temporary helper method to display information in the onscreen TextView about the state of
-     * the inventory database.
-     */
-    private void displayDatabaseInfo() {
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper and pass the
-        // context, which is the current activity.
-        InventoryDbHelper mDbHelper = new InventoryDbHelper(this);
-
-        // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-        String[] projection = {
-                InventoryContract.InventoryEntry._ID,
-                InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME,
-                InventoryContract.InventoryEntry.COLUMN_PRODUCT_DESC,
-                InventoryContract.InventoryEntry.COLUMN_PRICE,
-                InventoryContract.InventoryEntry.COLUMN_QUANTITY,
-                InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME,
-                InventoryContract.InventoryEntry.COLUMN_SUPPLIER_PHONE
-        };
-
-        Cursor cursor = db.query(
-                InventoryContract.InventoryEntry.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null);
-
-        TextView displayView = findViewById(R.id.productName);
-
-        try {
-            // Create a header in the Text View that looks like this:
-            //
-            // The inventory table contains <number of rows in Cursor> inventory.
-            // _id - name - desc - price
-            //
-            // In the while loop below, iterate through the rows of the cursor and display
-            // the information from each column in this order.
-            displayView.setText("The inventory table contains " + cursor.getCount() + " products.\n\n");
-            displayView.append(InventoryContract.InventoryEntry._ID + " - " +
-                    InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME + " - " +
-                    InventoryContract.InventoryEntry.COLUMN_PRODUCT_DESC + " - " +
-                    InventoryContract.InventoryEntry.COLUMN_PRICE + "\n");
-
-
-            // Figure out the index of each column
-            int idColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
-            int nameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME);
-            int descColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_PRODUCT_DESC);
-            int priceColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_PRICE);
-
-
-            // Iterate through all the returned rows in the cursor
-            while (cursor.moveToNext()) {
-                // Use that index to extract the String or Int value of the word
-                // at the current row the cursor is on.
-                int currentID = cursor.getInt(idColumnIndex);
-                String currentName = cursor.getString(nameColumnIndex);
-                String currentDesc = cursor.getString(descColumnIndex);
-                String currentPrice = cursor.getString(priceColumnIndex);
-                // Display the values from each column of the current row in the cursor in the TextView
-                displayView.append(("\n" + currentID + " - " +
-                        currentName + " - " +
-                        currentDesc + " - " +
-                        currentPrice));
+                // Launch the {@link EditorActivity} to display the data for the current product.
+                startActivity(intent);
             }
-        } finally {
-            // Always close the cursor when you're done reading from it. This releases all its
-            // resources and makes it invalid.
-            cursor.close();
-        }
+        });
+
+        // Kick off the loader
+        getLoaderManager().initLoader(INVENTORY_LOADER, null, this);
     }
 
     /**
      * Helper method to insert hardcoded product data into the database. For debugging purposes only.
      */
     private void insertProduct() {
-        // Gets the database in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        // Create a ContentValues object where column names are the keys, and product attributes
-        // are the values.
+        // Create a ContentValues object where column names are the keys,
+        // and sample data attributes are the values.
         ContentValues values = new ContentValues();
-        values.put(InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME, "Product Name");
-        values.put(InventoryContract.InventoryEntry.COLUMN_PRODUCT_DESC, "Product Desc");
-        values.put(InventoryContract.InventoryEntry.COLUMN_PRICE, 0.00);
-        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, 2);
-        values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, "Supplier");
-        values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_PHONE, "Phone");
+        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Sample");
+        values.put(InventoryEntry.COLUMN_PRODUCT_DESC, "Sample description");
+        values.put(InventoryEntry.COLUMN_PRICE, 0.00);
+        values.put(InventoryEntry.COLUMN_QUANTITY, 7);
+        values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, "Supplier");
+        values.put(InventoryEntry.COLUMN_SUPPLIER_PHONE, "Phone");
 
-        long newRowId = db.insert(InventoryContract.InventoryEntry.TABLE_NAME, null, values);
+        // Insert a new row for Sample into the provider using the ContentResolver.
+        Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+    }
 
-        Log.v("CatalogActivity", "New row ID " + newRowId);
+    /**
+     * Helper method to delete all products in the database.
+     */
+    private void deleteAllProducts() {
+        int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
+        Log.v("CatalogActivity", rowsDeleted + " rows deleted from product database");
     }
 
     @Override
@@ -240,13 +127,86 @@ public class CatalogActivity extends AppCompatActivity {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
                 insertProduct();
-                displayDatabaseInfo();
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-                // Do nothing for now
+                deleteAllProducts();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Instantiate and return a new Loader for the given ID.
+     *
+     * @param id   The ID whose loader is to be created.
+     * @param args Any arguments supplied by the caller.
+     * @return Return a new Loader instance that is ready to start loading.
+     */
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // Define a projection that specifies the columns from the table we care about.
+        String[] projection = {InventoryEntry._ID,
+                InventoryEntry.COLUMN_PRODUCT_NAME,
+                InventoryEntry.COLUMN_PRODUCT_DESC,
+                InventoryEntry.COLUMN_PRICE,
+                InventoryEntry.COLUMN_QUANTITY,
+                InventoryEntry.COLUMN_SUPPLIER_NAME,
+                InventoryEntry.COLUMN_SUPPLIER_PHONE };
+
+        // Order by product names in ascending order
+        String sortOrder = InventoryEntry.COLUMN_PRODUCT_NAME + " ASC";
+
+        // This loader will execute the ContentProvider's query method on a background thread
+        return new CursorLoader(this,   // Parent activity context
+                InventoryEntry.CONTENT_URI,   // Provider content URI to query
+                projection,                 // Columns to include in the resulting Cursor
+                null,               // No selection clause
+                null,            // No selection arguments
+                sortOrder);                  // Sort in ascending order
+    }
+
+    /**
+     * Called when a previously created loader has finished loading.
+     *
+     * @param loader The Loader that has finished.
+     * @param data   The data generated by the Loader.
+     */
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mCursorAdapter.swapCursor(data);
+    }
+
+    /**
+     * Called when a previously created loader is being reset; making its data unavailable.
+     *
+     * @param loader The Loader that is being reset.
+     */
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Callback called when the data needs to be deleted
+        mCursorAdapter.swapCursor(null);
+    }
+
+    /**
+     * This method decrements the inventory value by 1, based on hitting the "productSold" button
+     */
+     public void productSold(View view) {
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        quantity = Integer.parseInt(quantityString);
+        quantity -= 1;
+        if (quantity < 0) {
+            quantity = 0;
+
+//        int quantity = Integer.parseInt(quantityString);
+//
+//        if(quantity>1){
+//            quantity = quantity - 1;
+//            mQuantityEditText.setText(Integer.toString(quantity));
+//        } else if (quantity <=0){
+//            quantity = 0;
+//            mQuantityEditText.setText(Integer.toString(quantity));
+//        }
+        }
     }
 }

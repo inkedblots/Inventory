@@ -19,7 +19,6 @@
         </activity>
         <activity
             android:name="com.example.android.inventory.EditorActivity"
-            android:label="@string/editor_activity_new_product"
             android:theme="@style/MyTheme"
             android:parentActivityName="com.example.android.inventory.CatalogActivity"
             tools:targetApi="jelly_bean">
@@ -28,6 +27,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.inventory.CatalogActivity" />
         </activity>
+
+        <provider
+            android:name=".data.InventoryProvider"
+            android:authorities="com.example.android.inventory"
+            android:exported="false" />
     </application>
 
 </manifest>
