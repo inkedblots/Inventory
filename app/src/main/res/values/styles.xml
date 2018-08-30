@@ -9,16 +9,17 @@
     </style>
     <!-- Theme of the editor -->
     <style name="MyTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/editorColorPrimaryDark</item>
-        <item name="colorPrimaryDark">@color/editorColorPrimary</item>
+        <item name="colorPrimary">@color/editorColorPrimary</item>
+        <item name="colorPrimaryDark">@color/editorColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorPrimaryInverse">@color/primary_text_material_dark</item>
     </style>
     <!-- Style for a category in the editor -->
     <style name="CategoryStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="android:textColor">@color/editorColorPrimaryDark</item>
         <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-medium</item>
         <item name="android:textSize">14sp</item>

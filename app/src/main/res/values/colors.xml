@@ -2,11 +2,14 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#f9a825</color>
 
     <!-- Primary color for the editor -->
-    <color name="editorColorPrimary">#673ab7</color>
+    <color name="editorColorPrimary">#424242</color>
 
     <!-- Primary dark color for the editor -->
-    <color name="editorColorPrimaryDark">#332c4e</color>
+    <color name="editorColorPrimaryDark">#212121</color>
+    <color name="background_material_light">#ffffff</color>
+    <color name="text">#424242</color>
+    <color name="primary_text_material_dark">#424242</color>
 </resources>

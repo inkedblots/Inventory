@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
@@ -28,8 +27,6 @@ import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    int quantity = 0;
-    private EditText mQuantityEditText;
 
     /** Identifier for the products data loader */
     private static final int INVENTORY_LOADER = 0;
@@ -95,7 +92,7 @@ public class CatalogActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Sample");
         values.put(InventoryEntry.COLUMN_PRODUCT_DESC, "Sample description");
-        values.put(InventoryEntry.COLUMN_PRICE, 0.00);
+        values.put(InventoryEntry.COLUMN_PRICE, 1.00);
         values.put(InventoryEntry.COLUMN_QUANTITY, 7);
         values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, "Supplier");
         values.put(InventoryEntry.COLUMN_SUPPLIER_PHONE, "Phone");
@@ -188,25 +185,16 @@ public class CatalogActivity extends AppCompatActivity implements
         mCursorAdapter.swapCursor(null);
     }
 
-    /**
-     * This method decrements the inventory value by 1, based on hitting the "productSold" button
-     */
-     public void productSold(View view) {
-        String quantityString = mQuantityEditText.getText().toString().trim();
-        quantity = Integer.parseInt(quantityString);
-        quantity -= 1;
-        if (quantity < 0) {
-            quantity = 0;
-
-//        int quantity = Integer.parseInt(quantityString);
-//
-//        if(quantity>1){
-//            quantity = quantity - 1;
-//            mQuantityEditText.setText(Integer.toString(quantity));
-//        } else if (quantity <=0){
+//    /**
+//     * This method decrements the inventory value by 1, based on hitting the "productSold" button
+//     */
+//     public void productSold(View view) {
+//        String quantityString = mQuantityEditText.getText().toString().trim();
+//        quantity = Integer.parseInt(quantityString);
+//        quantity -= 1;
+//        if (quantity < 0) {
 //            quantity = 0;
-//            mQuantityEditText.setText(Integer.toString(quantity));
+//
 //        }
-        }
-    }
+//    }
 }

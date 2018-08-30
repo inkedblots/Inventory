@@ -1,12 +1,17 @@
 package com.example.android.inventory;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract;
 
@@ -54,7 +59,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
      *                correct row.
      */
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
         TextView productNameTextView = view.findViewById(R.id.productName);
         TextView productDescTextView = view.findViewById(R.id.productDesc);
@@ -64,6 +69,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
         TextView supplierNameTextView = view.findViewById(R.id.supplierName);
         TextView supplierPhoneTextView = view.findViewById(R.id.supplierPhone);
+        Button soldButton = view.findViewById(R.id.productSold);
 
         // Find the columns of products attributes that we're interested in
         int productNameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME);
@@ -85,6 +91,26 @@ public class InventoryCursorAdapter extends CursorAdapter {
         String supplierName = cursor.getString(supplierNameColumnIndex);
         String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
+        String currentQuantity = cursor.getString(quantityColumnIndex);
+        final int quantityIntCurrent = Integer.valueOf(currentQuantity);
+
+        final int productId = cursor.getInt(cursor.getColumnIndex(InventoryContract.InventoryEntry._ID));
+
+        soldButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if (quantityIntCurrent > 0) {
+                    int newQuantity = quantityIntCurrent - 1;
+                    Uri quantityUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, productId);
+
+                    ContentValues values = new ContentValues();
+                    values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, newQuantity);
+                    context.getContentResolver().update(quantityUri, values, null, null);
+                } else {
+                    Toast.makeText(context, "This product is out of stock", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         // Update the TextViews with the attributes for the current product
         productNameTextView.setText(productName);
         productDescTextView.setText(productDesc);
@@ -94,5 +120,6 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
         supplierNameTextView.setText(supplierName);
         supplierPhoneTextView.setText(supplierPhone);
+
     }
 }

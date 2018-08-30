@@ -53,10 +53,12 @@
         tools:targetApi="jelly_bean" />
 
     <Button
+        android:id="@+id/productSold"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="75dp"
         android:layout_height="48dp"
-        android:onClick="productSold"
-        android:text="Sold" />
+        android:focusable="false"
+        android:text="Sold"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>

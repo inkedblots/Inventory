@@ -40,12 +40,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Content URI for the existing product (null if it's a new product)
      */
     private Uri mCurrentProductUri;
+
     private EditText mProductNameEditText;
     private EditText mProductDescEditText;
     private EditText mPriceEditText;
     private EditText mQuantityEditText;
     private EditText mSupplierNameEditText;
-    private EditText mPhoneNumberEditText;
+    private EditText mSupplierPhoneEditText;
+
 
     /**
      * Boolean flag that keeps track of whether the product has been edited (true) or not (false)
@@ -91,50 +93,49 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mPriceEditText = findViewById(R.id.edit_price);
         mQuantityEditText = findViewById(R.id.edit_quantity);
         mSupplierNameEditText = findViewById(R.id.edit_supplier_name);
-        mPhoneNumberEditText = findViewById(R.id.edit_supplier_phone);
+        mSupplierPhoneEditText = findViewById(R.id.edit_supplier_phone);
 
         mProductNameEditText.setOnTouchListener(mTouchListener);
         mProductDescEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
-        mPhoneNumberEditText.setOnTouchListener(mTouchListener);
+        mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
 
-    // Find the "+" and "-" images, and "call_button" and set OnClickListeners.
-    ImageView decreaseView = findViewById(R.id.decrease);
+        // Find "+" and "-" images, and "call_button"; set OnClickListeners.
+        ImageView decreaseView = findViewById(R.id.decrease);
         decreaseView.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
-            updateQuantity(v);
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                updateQuantity(v);
+            }
+        });
 
-    ImageView increaseView = findViewById(R.id.increase);
+        ImageView increaseView = findViewById(R.id.increase);
         increaseView.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
-            updateQuantity(v);
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                updateQuantity(v);
+            }
+        });
 
-    ImageButton callButton = findViewById(R.id.call_button);
+        ImageButton callButton = findViewById(R.id.call_button);
         callButton.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
-            // Get the supplier's phone number and dial it
-            String phone = mPhoneNumberEditText.getText().toString().trim();
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+            @Override
+            public void onClick(View v) {
+                String phone = mSupplierPhoneEditText.getText().toString().trim();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
 
-            // Check if the user's device has an app that can handle the intent
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
+                // Check if the user's device has an app that can handle the intent
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
-        }
-    });
-}
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -165,35 +166,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                // Save to db
-                saveProduct();
-                //Exit activity
-                finish();
+                saveProduct();  // Save to db
+//                finish();  //Exit activity
                 return true;
+
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
-                // Pop up confirmation dialog for deletion
-                showDeleteConfirmationDialog();
+                showDeleteConfirmationDialog();  // Pop up confirmation dialog for deletion
+                return true;
+
                 // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
-                // If the product hasn't changed, continue with navigating up to parent activity
-                // which is the {@link CatalogActivity}.
+                // If product hasn't changed, continue navigating up to parent activity {@link CatalogActivity}.
                 if (!mProductHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditorActivity.this);
                     return true;
                 }
-                // Otherwise if there are unsaved changes, setup a dialog to warn the user.
-                // Create a click listener to handle the user confirming that
-                // changes should be discarded.
-                DialogInterface.OnClickListener discardButtonClickListener =
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                // User clicked "Discard" button, navigate to parent activity.
-                                NavUtils.navigateUpFromSameTask(EditorActivity.this);
-                            }
-                        };
-                // Show a dialog that notifies the user they have unsaved changes
+
+                // if there are unsaved changes, setup a dialog to warn the user.
+                DialogInterface.OnClickListener discardButtonClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Discard" button, navigate to parent activity.
+                        NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                    }
+                };
+
+                // Show a dialog that notifies the user they have unsaved changes.
                 showUnsavedChangesDialog(discardButtonClickListener);
                 return true;
         }
@@ -222,7 +221,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 null);                  // Default sort order
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         // Bail early if the cursor is null or there is less than 1 row in the cursor
@@ -244,9 +242,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             String productName = cursor.getString(productNameColumnIndex);
             String productDesc = cursor.getString(productDescColumnIndex);
             float price = (float) (cursor.getInt(priceColumnIndex) * 0.01);
-            //float price = (float) (data.getInt(priceColumnIndex) * 0.01);
             int quantity = cursor.getInt(quantityColumnIndex);
-            //int quantity = data.getInt(quantityColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
@@ -256,7 +252,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mPriceEditText.setText(String.format(Locale.ENGLISH, "%.2f", price));
             mQuantityEditText.setText(String.format(Locale.ENGLISH, "%d", quantity));
             mSupplierNameEditText.setText(supplierName);
-            mPhoneNumberEditText.setText(supplierPhone);
+            mSupplierPhoneEditText.setText(supplierPhone);
         }
     }
 
@@ -268,7 +264,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mPriceEditText.setText("");
         mQuantityEditText.setText("0");
         mSupplierNameEditText.setText("");
-        mPhoneNumberEditText.setText("");
+        mSupplierPhoneEditText.setText("");
     }
 
     /**
@@ -280,7 +276,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String priceString = mPriceEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
-        String phoneNumberString = mPhoneNumberEditText.getText().toString().trim();
+        String phoneNumberString = mSupplierPhoneEditText.getText().toString().trim();
 
         ContentValues values = new ContentValues();
 
@@ -409,7 +405,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     /**
      * Show short toast messages.
      *
-     * @param message String to ne displayed.
+     * @param message String to be displayed.
      */
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -417,7 +413,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     /**
      * Show a dialog that warns the user there are unsaved changes that will be lost
-     * if they continue leaving the editor.
+     * if they leave the editor.
      *
      * @param discardButtonClickListener is the click listener for what to do when
      *                                   the user confirms they want to discard their changes
@@ -427,12 +423,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
         builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked "Keep editing" button, to dismiss the dialog and continue
-                // editing.
+                // User clicked the "Keep editing" button; dismiss the dialog and continue editing.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -451,17 +447,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked "Delete" button; delete the product.
+                // User clicked the "Delete" button; delete the book.
                 deleteProduct();
             }
         });
 
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked "Cancel" button; dismiss the dialog; continue editing product.
+                // User clicked the "Cancel" button; dismiss the dialog and continue editing.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -472,6 +469,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     /**
      * This method is called when the back button is pressed.
      */
@@ -484,20 +482,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
         // Otherwise, if there are unsaved changes, setup a dialog to warn the user.
         // Create a click listener to handle the user confirming that changes should be discarded.
-        DialogInterface.OnClickListener discardButtonClickListener =
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // User clicked "Discard" button, close the current activity.
-                        finish();
-                    }
-                };
-        // Show dialog that there are unsaved changes
+        DialogInterface.OnClickListener discardButtonClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // User clicked "Discard" button; close the current activity.
+                finish();
+            }
+        };
+
+        // Show dialog that there are unsaved changes.
         showUnsavedChangesDialog(discardButtonClickListener);
     }
 
     /**
-     * Update quantity of the books.
+     * Update quantity of products.
      *
      * @param view The button being clicked
      */
