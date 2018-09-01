@@ -7,13 +7,13 @@
     android:padding="@dimen/activity_margin"
     tools:context="com.example.android.inventory.EditorActivity">
 
+    <!-- PRODUCT LAYOUT -->
     <TextView
-    style="@style/CategoryStyle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/category_product_label" />
+        style="@style/CategoryStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/category_product_label" />
 
-    <!-- Product Name field -->
     <EditText
         android:id="@+id/edit_product_name"
         style="@style/EditorFieldStyle"
@@ -36,7 +36,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
     <!-- PRICE LAYOUT -->
     <LinearLayout
@@ -49,23 +49,21 @@
             android:layout_width="151dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:paddingTop="10dp"
             android:text="@string/category_price_label"
-            android:textSize="14sp"
-            android:layout_marginStart="16dp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/edit_price"
             android:layout_width="76dp"
             android:layout_height="wrap_content"
-
             android:gravity="end"
             android:hint="@string/hint_price"
             android:inputType="numberDecimal"
             android:paddingBottom="10dp"
             android:textSize="12sp" />
     </LinearLayout>
-
 
     <!-- QUANTITY LAYOUT -->
     <LinearLayout
@@ -78,13 +76,13 @@
             android:layout_width="151dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:paddingEnd="25dp"
             android:paddingRight="25dp"
             android:paddingTop="10dp"
             android:text="@string/category_quantity_label"
             android:textSize="14sp"
-            tools:ignore="RtlSymmetry"
-            android:layout_marginStart="16dp" />
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/decrease"
@@ -112,18 +110,19 @@
             android:contentDescription="@string/plus_one"
             android:src="@drawable/ic_add_circle" />
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
+    <!-- SUPPLIER LAYOUT -->
     <TextView
         style="@style/CategoryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/category_supplier_label" />
 
-    <!-- Product Name field -->
     <EditText
         android:id="@+id/edit_supplier_name"
         style="@style/EditorFieldStyle"
