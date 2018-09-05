@@ -93,7 +93,7 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Sample");
         values.put(InventoryEntry.COLUMN_PRODUCT_DESC, "Sample description");
         values.put(InventoryEntry.COLUMN_PRICE, 1.00);
-        values.put(InventoryEntry.COLUMN_QUANTITY, 7);
+        values.put(InventoryEntry.COLUMN_QUANTITY, 1);
         values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, "Supplier");
         values.put(InventoryEntry.COLUMN_SUPPLIER_PHONE, "Phone");
 
@@ -157,7 +157,7 @@ public class CatalogActivity extends AppCompatActivity implements
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
                 InventoryEntry.CONTENT_URI,   // Provider content URI to query
-                projection,                 // Columns to include in the resulting Cursor
+                projection,                  // Columns to include in the resulting Cursor
                 null,               // No selection clause
                 null,            // No selection arguments
                 sortOrder);                  // Sort in ascending order
@@ -184,17 +184,4 @@ public class CatalogActivity extends AppCompatActivity implements
         // Callback called when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
     }
-
-//    /**
-//     * This method decrements the inventory value by 1, based on hitting the "productSold" button
-//     */
-//     public void productSold(View view) {
-//        String quantityString = mQuantityEditText.getText().toString().trim();
-//        quantity = Integer.parseInt(quantityString);
-//        quantity -= 1;
-//        if (quantity < 0) {
-//            quantity = 0;
-//
-//        }
-//    }
 }

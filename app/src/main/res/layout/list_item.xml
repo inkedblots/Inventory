@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
+        style="@style/listItemTxtViewMd"
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#2B3D4D"
+        android:textColor="@color/productName"
         tools:targetApi="jelly_bean" />
 
     <TextView
+        style="@style/listItemProdDesc"
         android:id="@+id/productDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
+        android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
     <TextView
+        style="@style/listItemPrice"
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
+        android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
     <TextView
+        style="@style/listItemQty"
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
+        android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
     <TextView
+        style="@style/listItemPriceSupName"
         android:id="@+id/supplierName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
+        android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
     <TextView
+        style="@style/listItemPhone"
         android:id="@+id/supplierPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
+        android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
     <Button
@@ -58,7 +62,13 @@
         android:layout_width="75dp"
         android:layout_height="48dp"
         android:focusable="false"
-        android:text="Sold"
+        android:text="@string/soldBtn"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/empty_txtvw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp" />
 
 </LinearLayout>

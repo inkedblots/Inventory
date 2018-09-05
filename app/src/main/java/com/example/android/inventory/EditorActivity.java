@@ -351,11 +351,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
                 // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_product_failed),
+                Toast.makeText(this, getString(R.string.product_insert_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_insert_product_successful),
+                Toast.makeText(this, getString(R.string.product_insert_successful),
                         Toast.LENGTH_SHORT).show();
             }
         } else {
@@ -364,11 +364,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
                 // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, getString(R.string.editor_update_product_failed),
+                Toast.makeText(this, getString(R.string.product_update_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_update_product_successful),
+                Toast.makeText(this, getString(R.string.product_update_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -390,11 +390,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
-                Toast.makeText(this, getString(R.string.editor_delete_product_failed),
+                Toast.makeText(this, getString(R.string.product_delete_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the delete was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_delete_product_successful),
+                Toast.makeText(this, getString(R.string.product_delete_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }

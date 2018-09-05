@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary" tools:keep="@color/colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark" tools:keep="@color/colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#f9a825</color>
 
     <!-- Primary color for the editor -->
@@ -9,7 +9,8 @@
 
     <!-- Primary dark color for the editor -->
     <color name="editorColorPrimaryDark">#212121</color>
-    <color name="background_material_light">#ffffff</color>
-    <color name="text">#424242</color>
+    <color name="background_material_light" tools:ignore="PrivateResource">#ffffff</color>
+    <color name="text">#626262</color>
     <color name="primary_text_material_dark">#424242</color>
+    <color name="productName">#2b3d4d</color>
 </resources>

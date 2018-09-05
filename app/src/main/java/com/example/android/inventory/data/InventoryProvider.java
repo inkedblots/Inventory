@@ -129,7 +129,9 @@ public class InventoryProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues contentValues) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
+
             case PRODUCT:
+                getContext().getContentResolver().notifyChange(uri, null);
                 return insertProduct(uri, contentValues);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
