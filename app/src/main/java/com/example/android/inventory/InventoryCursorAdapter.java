@@ -85,7 +85,9 @@ public class InventoryCursorAdapter extends CursorAdapter {
         String productName = cursor.getString(productNameColumnIndex);
         String productDesc = cursor.getString(productDescColumnIndex);
 
-        String price = cursor.getString(priceColumnIndex);
+        float floatPrice = cursor.getFloat(priceColumnIndex);
+        String price = String.valueOf(floatPrice * 0.01);
+
         String quantity = cursor.getString(quantityColumnIndex);
 
         String supplierName = cursor.getString(supplierNameColumnIndex);
