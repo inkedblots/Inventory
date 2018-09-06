@@ -90,12 +90,12 @@ public class CatalogActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and sample data attributes are the values.
         ContentValues values = new ContentValues();
-        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Sample");
+        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Sample Product");
         values.put(InventoryEntry.COLUMN_PRODUCT_DESC, "Sample description");
-        values.put(InventoryEntry.COLUMN_PRICE, 1.00);
+        values.put(InventoryEntry.COLUMN_PRICE, 110);
         values.put(InventoryEntry.COLUMN_QUANTITY, 1);
-        values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, "Supplier");
-        values.put(InventoryEntry.COLUMN_SUPPLIER_PHONE, "Phone");
+        values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, "Supplier Name");
+        values.put(InventoryEntry.COLUMN_SUPPLIER_PHONE, "555-555-1212");
 
         // Insert a new row for Sample into the provider using the ContentResolver.
         Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);

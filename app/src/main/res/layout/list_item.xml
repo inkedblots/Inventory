@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/productName"
+        android:textStyle="bold"
         tools:targetApi="jelly_bean" />
 
     <TextView
@@ -34,7 +35,7 @@
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
+        android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
@@ -43,7 +44,7 @@
         android:id="@+id/supplierName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
+        android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 
@@ -52,7 +53,7 @@
         android:id="@+id/supplierPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
+        android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/text"
         tools:targetApi="jelly_bean" />
 

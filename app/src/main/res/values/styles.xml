@@ -24,7 +24,7 @@
         <item name="android:paddingBottom">20dp</item>
         <item name="android:textColor">@color/editorColorPrimaryDark</item>
         <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="PriceLabel">
         <item name="android:layout_height">wrap_content</item>
@@ -32,7 +32,7 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">16dp</item>
         <item name="android:paddingTop">10dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="EditPrice">
         <item name="android:layout_height">wrap_content</item>
@@ -40,7 +40,7 @@
         <item name="android:gravity">end</item>
         <item name="android:inputType">numberDecimal</item>
         <item name="android:paddingBottom">10dp</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     <style name="QuantityLabel">
         <item name="android:layout_height">wrap_content</item>
@@ -50,20 +50,20 @@
         <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">25dp</item>
         <item name="android:paddingRight">25dp</item>
         <item name="android:paddingTop">10dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="EditQuantity">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">50dp</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:inputType">number</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     <style name="EditorStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">329dp</item>
         <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-light</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_gravity">end</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
@@ -106,19 +106,19 @@
 
     <!-- LIST_ITEM STYLES -->
     <style name="listItemProdDesc">
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
     <style name="listItemPrice">
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
     <style name="listItemQty">
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
     <style name="listItemPriceSupName">
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
     <style name="listItemPhone">
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
     <style name="listItemTxtViewMd">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
