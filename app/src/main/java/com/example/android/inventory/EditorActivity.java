@@ -26,7 +26,16 @@ import android.widget.Toast;
 import com.example.android.inventory.data.InventoryContract;
 
 import java.util.Locale;
+/*
 
+  A whole host of individuals assisted me with this this project, as well as stack overflow,
+  Google search, comments on Slack and chats. Many code snippets
+  were not of my creation. If it was not for the help of these individuals I wouldn't have
+  gotten this far. I thank them whole heartedly.
+  Here are the people from Udacity that assisted: Matthew Bailey (TheBaileyBrew),
+  Charles Rowland (Charles Rowland)
+
+ */
 
 /**
  * Allows user to create a new product or edit an existing one.

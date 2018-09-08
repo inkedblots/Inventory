@@ -122,9 +122,7 @@
     </style>
     <style name="listItemTxtViewMd">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textStyle">bold</item>
     </style>
-
-
-
 
 </resources>

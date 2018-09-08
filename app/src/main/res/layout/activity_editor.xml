@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <!--//A whole host of individuals assisted me with this this project, as well as stack overflow,-->
+    <!--//Google search, comments on Slack and chats. Many code snippets-->
+    <!--//were not of my creation. If it was not for the help of these individuals I wouldn't have-->
+    <!--//gotten this far. I thank them whole heartedly.-->
+    <!--//Here are the people from Udacity that assisted: Matthew Bailey (@TheBaileyBrew),-->
+    <!--//Charles Rowland (@Charles Rowland)-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activityEditorLayout"
@@ -18,13 +25,15 @@
         android:id="@+id/edit_product_name"
         style="@style/EditorStyle"
         android:hint="@string/hint_product_name"
-        android:inputType="textCapWords" />
+        android:inputType="textCapWords"
+        android:maxLength="20" />
 
     <EditText
         android:id="@+id/edit_product_desc"
         style="@style/EditorStyle"
         android:hint="@string/hint_product_desc"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:maxLength="40" />
 
     <TextView
         android:id="@+id/spacer"
@@ -47,7 +56,8 @@
         <EditText
             android:id="@+id/edit_price"
             style="@style/EditPrice"
-            android:hint="@string/hint_price" />
+            android:hint="@string/hint_price"
+            android:maxLength="5" />
     </LinearLayout>
 
     <!-- QUANTITY LAYOUT -->
@@ -73,7 +83,8 @@
         <EditText
             android:id="@+id/edit_quantity"
             style="@style/EditQuantity"
-            android:hint="@string/hint_quantity" />
+            android:hint="@string/hint_quantity"
+            android:maxLength="3" />
 
         <ImageView
             android:id="@+id/increase"
@@ -97,7 +108,8 @@
         android:id="@+id/edit_supplier_name"
         style="@style/EditorStyle"
         android:hint="@string/hint_supplier_name"
-        android:inputType="textCapWords" />
+        android:inputType="textCapWords"
+        android:maxLength="20" />
 
     <EditText
         android:id="@+id/edit_supplier_phone"
@@ -105,7 +117,8 @@
         android:layout_width="329dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_phone_number"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:maxLength="15" />
 
     <!-- CALL BUTTON LAYOUT -->
     <ImageButton

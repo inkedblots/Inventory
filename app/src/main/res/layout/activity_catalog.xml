@@ -10,7 +10,7 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp" />
+        android:padding="@dimen/list_padding" />
 
     <!-- Empty view for the list -->
     <RelativeLayout
@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/empty_box_filled_100" />
+            android:src="@drawable/empty_box_filled_100"
+            android:contentDescription="@string/empty_box" />
 
         <TextView
             android:id="@+id/empty_title_text"
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/empty_box_image"
-            android:paddingTop="16dp"
+            android:paddingTop="@dimen/emptyTitleText_paddingTp"
             android:text="@string/empty_view_title_text"
             tools:targetApi="jelly_bean" />
 
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/empty_title_text"
-            android:paddingTop="16dp"
+            android:paddingTop="@dimen/emptySubTitleText_paddingTp"
             android:text="@string/empty_view_subtitle_text"
             tools:targetApi="jelly_bean" />
     </RelativeLayout>

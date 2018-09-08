@@ -6,4 +6,11 @@
     <!-- Margin value used throughout app -->
     <dimen name="activity_margin">16dp</dimen>
 
+    <!-- ACTIVITY CATALOG -->
+    <dimen name="list_padding">16dp</dimen>
+    <dimen name="emptyTitleText_paddingTp">16dp</dimen>
+    <dimen name="emptySubTitleText_paddingTp">16dp</dimen>
+
+    <!--LIST ITEM -->
+    <dimen name="empty_txtvw_padding">5dp</dimen>
 </resources>

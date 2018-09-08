@@ -15,6 +15,17 @@ import java.util.Objects;
 
 import static com.example.android.inventory.data.InventoryContract.InventoryEntry.COLUMN_PRODUCT_NAME;
 
+/*
+
+  A whole host of individuals assisted me with this this project, as well as stack overflow,
+  Google search, comments on Slack and chats. Many code snippets
+  were not of my creation. If it was not for the help of these individuals I wouldn't have
+  gotten this far. I thank them whole heartedly.
+  Here are the people from Udacity that assisted: Matthew Bailey (TheBaileyBrew),
+  Charles Rowland (Charles Rowland)
+
+ */
+
 public class InventoryProvider extends ContentProvider {
 
     public static final String LOG_TAG = InventoryProvider.class.getSimpleName();

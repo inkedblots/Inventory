@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Inventory</string>
 
     <!-- Menu option that inserts fake data into the app -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <!-- deletes all product information in the app -->
     <string name="action_delete_all_entries">Delete All Products</string>
-
-    <string name="editor_activity_new_product">Add Product</string>
 
     <!--//MENU ITEMS//-->
     <!-- Editor menu; save data and leave -->
@@ -19,7 +17,6 @@
     <!-- LABELS -->
     <string name="category_product_label">Product Information</string>
     <string name="category_name_label">Product</string>
-    <string name="category_desc_label">Description</string>
     <string name="category_price_label">Price</string>
     <string name="category_quantity_label">Quantity</string>
     <string name="category_supplier_label">Supplier Information</string>
@@ -48,13 +45,12 @@
     <string name="cancel">Cancel</string>
 
     <!-- Plus/Minus button -->
-    <string name="increment">+</string>
     <string name="decrement">-</string>
 
     <string name="minus_one">Subtract one</string>
     <string name="plus_one">Add one</string>
     <string name="call_button">Call button</string>
-    <string name="delete_btn">Delete Product</string>
+    <string name="delete_btn" tools:keep="@string/delete_btn">Delete Product</string>
     <string name="soldBtn">Sold</string>
 
     <!-- TOAST-->
@@ -71,7 +67,6 @@
     <string name="name_required">Product name required</string>
     <string name="desc_required">Description name required</string>
     <string name="price_required">Price required</string>
-    <string name="quantity_required">Quantity is required</string>
     <string name="supplier_name_required">The supplier\'s name is required</string>
     <string name="supplier_phone_required">The supplier\'s phone number is required</string>
 
@@ -81,6 +76,6 @@
     <!-- Confirm deleting the current product -->
     <string name="delete">Delete</string>
 
-
+    <string name="empty_box">image of empty box</string>
 
 </resources>
